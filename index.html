@@ -8,29 +8,30 @@
 		<link rel="stylesheet" href="style.css" />
 	</head>
 	<body>
-		<div>
+		<div class="container">
 			<h1>Cat clicker</h1>
+			<button>Get Image</button>
+			<div class="listContainer">
+				<h2>list of cats</h2>
+				<div class="catList">
+					<p class="cat" data-id="0">cat1</p>
+					<p class="cat" data-id="1">cat2</p>
+					<p class="cat" data-id="2">cat2</p>
+					<p class="cat" data-id="3">cat3</p>
+					<p class="cat" data-id="4">cat4</p>
+					<p class="cat" data-id="5">cat5</p>
+					<p class="cat" data-id="6">cat6</p>
+				</div>
+			</div>
 			<div class="catsContainer">
-				<div class="cat1">
-					<img class="cat" src="/cat.jpg" alt="cat" />
-					<div>
-						<h2>My name is Wiskey</h2>
-						<p>
-							This Cat has been clicked
-							<span class="count" data-value="0">0</span> Times
-						</p>
-					</div>
+				<div id="catBox" class="catBox">
+					<!-- <img class="catImage" src="/cat.jpg" alt="cat" /> -->
 				</div>
-				<div class="cat2">
-					<img class="cat" src="/cat2.jfif" alt="cat" />
-					<div>
-						<h2>My name is Catsy</h2>
-						<p id="disc">
-							This Cat has been clicked
-							<span class="count" data-value="0">0</span> Times
-						</p>
-					</div>
-				</div>
+				<h2>My name is <span class="catName">Wiskey</span></h2>
+				<p>
+					This Cat has been clicked
+					<span class="count">0</span> Times
+				</p>
 			</div>
 		</div>
 		<script src="script.js"></script>
