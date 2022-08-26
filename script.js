@@ -1,58 +1,51 @@
-window.addEventListener('DOMContentLoaded', () =>{
-    var myRequest = new XMLHttpRequest();
-    myRequest.open('GET', 'https://api.thecatapi.com/v1/images/search?limit=10&api_key=7fa7eb6b-83b3-4a7a-871e-f26c3161b9ee');
-    myRequest.onload = function(){
-        let data = JSON.parse(myRequest.responseText)
-        myData(data)
-        filtercat(data)
-    }
-    myRequest.send();
-    myRequest.onerror= function(){
-        console.log("connection error")
-    };
-    let myData = function(data){
-        console.log(data)
-        return data
-    }
-})
-
+let catId = document.querySelectorAll(".cat");
+var myRequest = new XMLHttpRequest();
+myRequest.open('GET', 'https://api.thecatapi.com/v1/breeds?limit=10&api_key=7fa7eb6b-83b3-4a7a-871e-f26c3161b9ee');
+myRequest.onload = () =>{
+    data = JSON.parse(myRequest.responseText)
+    //filter to only include those with an `image` object
+    data.filter(img=> img.image?.url!=null)
+    data.filter((cats) => { 
+        cats.value = 0
+    })
+    filtercat(data)
+}
+myRequest.send();
+myRequest.onerror= () =>  console.log("connection error");
 
 function filtercat(data){
-    let catId = document.querySelectorAll(".cat");
-       catId.forEach(function (cat) {
-            cat.addEventListener("click", (e) => {
-                let Clikedcat = e.currentTarget.dataset.id
-                let displayedCat = data.filter(function (cat, index){
-                    cat.value = 0
-                    // console.log(index == Clikedcat)
-                    return index == Clikedcat
-                })
-                return displaycats(displayedCat)
-            })
+    catId.forEach((cat) => {
+        cat.addEventListener("click", (e) => {
+            let Clikedcat = e.currentTarget.dataset.id
+            let displayedCat = data.filter((cats, index) => {
+            return index == Clikedcat
+            });
+            return displaycats(displayedCat)
         });
+    })
 }
 
 function displaycats(cat){
-    // console.log(cat)
-    let catBox = document.getElementById("catBox")
-    let catImage = document.createElement('img')
-    let clickedClicked = document.querySelector(".count")
     cat.map(function(cat){
-        console.log(cat.value)
-        catImage.src = cat.url
-        catBox.appendChild(catImage)
-        clickedClicked.innerHTML = cat.value
-        return catBox.innerHTML = `<img class="catImage" src="${cat.url}" alt="cat" />`
+        document.querySelector(".catName").innerHTML = cat.name
+        document.querySelector(".catImage").src = cat.image.url
+        document.querySelector(".count").innerHTML= cat.value
+        document.querySelector(".catImage").addEventListener("click", () => {
+            cat.value = cat.value + 1 
+            document.querySelector(".count").innerHTML= cat.value
+        });
     })
-    let imageClicked = document.querySelector(".catImage")
-    imageClicked.addEventListener("click", (e) => {
-        let Clikedcat = e.currentTarget.parentElement.parentElement
-        let timesClicked = Clikedcat.querySelector(".count");
-        timesClicked.innerHTML = Number(timesClicked.dataset.value) + 1;
-        console.log(timesClicked.dataset.value = timesClicked.innerHTML)
-    });
 }
 
+catId.forEach((cat) => {
+    cat.addEventListener("click", (e) => {
+        catId.forEach((cat) => {
+            cat.classList.remove("activeCat")
+        })
+        let Clikedcat = e.currentTarget
+        Clikedcat.classList.add("activeCat")
+    })
+})    
 
-
-
+var randomUserApi ="randomuser.me"
+var newMovie ="a man from another star"

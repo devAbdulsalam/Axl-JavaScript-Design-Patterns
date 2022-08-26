@@ -20,11 +20,14 @@ h1{
     margin: 10px;
     gap: 2px;
 }
-.catList p{
+.cat{
     padding: 10px;
-    background-color: aqua;
+    background-color: rgb(33, 112, 112);
     cursor: pointer;
 
+}
+.activeCat{
+    background-color: aqua
 }
 .catsContainer{
     width: 500px;
@@ -44,7 +47,7 @@ h1{
     padding: 0;
     margin: 0;
 }
-.count{
+.count, .catName{
     color: green;
     font-weight: bolder;
 }
